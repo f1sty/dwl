@@ -112,14 +112,42 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", "-L", NULL };
+static const char *termcmd[] = { "foot", "tmux-session.sh", NULL };
 static const char *menucmd[] = { "bemenu-run", NULL };
+static const char *browser[]               = {"firefox", NULL};
+static const char *wiki[]                  = {"foot", "wiki.sh", NULL};
+static const char *cmus[]                  = {"foot", "cmus", NULL};
+static const char *pop_last_notification[] = {"dunstctl", "history-pop", NULL};
+static const char *close_notification[]    = {"dunstctl", "close-all", NULL};
+static const char *radio[]                 = {"bemenu-radio.sh", NULL};
+static const char *clipmenu[]              = {"clipmenu", NULL};
+static const char *screenshot[]            = {"screenshot.sh", NULL};
+static const char *cmus_pause[]            = {"cmus-remote", "-u", NULL};
+static const char *cmus_next[]             = {"cmus-remote", "-n", NULL};
+static const char *cmus_prev[]             = {"cmus-remote", "-r", NULL};
+static const char *volume_up[]             = {"pactl", "set-sink-volume", "0", "+5%", NULL};
+static const char *volume_down[]           = {"pactl", "set-sink-volume", "0", "-5%", NULL};
+static const char *toggle_mute[]           = {"pactl", "set-sink-mute", "0", "toggle", NULL};
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
+	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = browser} },
+	{ MODKEY,                    XKB_KEY_r,          spawn,          {.v = radio } },
+	{ MODKEY,                    XKB_KEY_n,          spawn,          {.v = wiki } },
+	{ MODKEY,                    XKB_KEY_v,          spawn,          {.v = clipmenu } },
+	{ MODKEY,                    XKB_KEY_s,          spawn,          {.v = screenshot } },
+	{ MODKEY,                    XKB_KEY_m,          spawn,          {.v = cmus } },
+	{ MODKEY,                    XKB_KEY_c,          spawn,          {.v = close_notification } },
+	{ MODKEY,                    XKB_KEY_z,          spawn,          {.v = pop_last_notification } },
+	{ MODKEY,                    XKB_KEY_Up,         spawn,          {.v = volume_up } },
+	{ MODKEY,                    XKB_KEY_Down,       spawn,          {.v = volume_down } },
+	{ MODKEY,                    XKB_KEY_End,        spawn,          {.v = toggle_mute } },
+	{ MODKEY,                    XKB_KEY_Left,       spawn,          {.v = cmus_prev } },
+	{ MODKEY,                    XKB_KEY_Right,      spawn,          {.v = cmus_next } },
+	{ MODKEY,                    XKB_KEY_Home,       spawn,          {.v = cmus_pause } },
 	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0}},
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
@@ -130,9 +158,9 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_C,          killclient,     {0} },
-	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
 	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
