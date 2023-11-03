@@ -112,11 +112,12 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", "tmux-session.sh", NULL };
+// static const char *termcmd[] = { "foot", "tmux-session.sh", NULL };
+static const char *termcmd[] = { "footclient", "-L", NULL };
 static const char *menucmd[] = { "bemenu-run", NULL };
 static const char *browser[]               = {"firefox", NULL};
-static const char *wiki[]                  = {"foot", "wiki.sh", NULL};
-static const char *cmus[]                  = {"foot", "cmus", NULL};
+static const char *wiki[]                  = {"footclient", "wiki.sh", NULL};
+static const char *cmus[]                  = {"footclient", "cmus", NULL};
 static const char *pop_last_notification[] = {"dunstctl", "history-pop", NULL};
 static const char *close_notification[]    = {"dunstctl", "close-all", NULL};
 static const char *radio[]                 = {"bemenu-radio.sh", NULL};
@@ -158,9 +159,9 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_C,          killclient,     {0} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_T,          setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_F,          setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_M,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
 	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
