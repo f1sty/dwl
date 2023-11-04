@@ -111,8 +111,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 /* commands */
 // static const char *termcmd[] = { "foot", "tmux-session.sh", NULL };
-static const char *termcmd[] = { "footclient", "-L", NULL };
-static const char *menucmd[] = { "bemenu-run", NULL };
+static const char *termcmd[]               = { "footclient", "-L", NULL };
+static const char *menucmd[]               = { "bemenu-run", NULL };
 static const char *browser[]               = {"firefox", NULL};
 static const char *wiki[]                  = {"footclient", "wiki.sh", NULL};
 static const char *cmus[]                  = {"footclient", "cmus", NULL};
@@ -127,6 +127,12 @@ static const char *cmus_prev[]             = {"cmus-remote", "-r", NULL};
 static const char *volume_up[]             = {"pactl", "set-sink-volume", "0", "+5%", NULL};
 static const char *volume_down[]           = {"pactl", "set-sink-volume", "0", "-5%", NULL};
 static const char *toggle_mute[]           = {"pactl", "set-sink-mute", "0", "toggle", NULL};
+static const char *move_right[]            = {"ydotool", "mousemove", "-x", "15", "-y", "0", NULL};
+static const char *move_left[]             = {"ydotool", "mousemove", "-x", "-15", "-y", "0", NULL};
+static const char *move_up[]               = {"ydotool", "mousemove", "-x", "0", "-y", "-15", NULL};
+static const char *move_down[]             = {"ydotool", "mousemove", "-x", "0", "-y", "15", NULL};
+static const char *click_right[]           = {"ydotool", "click", "0xC1", NULL};
+static const char *click_left[]            = {"ydotool", "click", "0xC0", NULL};
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -147,6 +153,12 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Left,       spawn,          {.v = cmus_prev } },
 	{ MODKEY,                    XKB_KEY_Right,      spawn,          {.v = cmus_next } },
 	{ MODKEY,                    XKB_KEY_Home,       spawn,          {.v = cmus_pause } },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_H,          spawn,          {.v = move_left } }, 
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          spawn,          {.v = move_down } }, 
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          spawn,          {.v = move_up } }, 
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_L,          spawn,          {.v = move_right } }, 
+	{ MODKEY,                    XKB_KEY_f,          spawn,          {.v = click_left } }, 
+	{ MODKEY,                    XKB_KEY_g,          spawn,          {.v = click_right } }, 
 	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0}},
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
