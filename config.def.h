@@ -49,7 +49,7 @@ static const MonitorRule monrules[] = {
 static const struct xkb_rule_names xkb_rules = {
 	/* can specify fields: rules, model, layout, variant, options */
         .layout = "us,ua",
-	.options = "grp:shifts_toggle,terminate:ctrll_alt_bksp,compose=menu",
+	.options = "grp:shifts_toggle,terminate:ctrl_alt_bksp,compose=menu",
 };
 
 static const int repeat_rate = 25;
